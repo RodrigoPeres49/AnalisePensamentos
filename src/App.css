@@ -1,38 +1,86 @@
-.App {
-  text-align: center;
-}
+/* PALHETA DE CORES */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* Cores de fundo */
+.offwhite { background-color: #e6e1cd; }
+.green { background-color: #c6d8c0; }
+.whipink { background-color: #d6b3b1; }
+.pink { background-color: #f97992; }
+.purple { background-color: #231b42; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* Cores de texto */
+.offwhite-text { color: #e6e1cd; }
+.green-text    { color: #c6d8c0; }
+.whipink-text  { color: #d6b3b1; }
+.pink-text     { color: #f97992; }
+.purple-text   { color: #231b42; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
-.App-link {
-  color: #61dafb;
+.main form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2rem;
+    padding: 3rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main input, label{
+  margin: 0.1rem;
+}
+.main button{
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  margin: 0.7rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  transition: background-color 0.3s ease-in;
+  transition: color 0.3s ease-in;
+}
+
+.main button:hover{
+
+  background-color: #e6e1cd;
+  color: black;
+}
+
+.main a{
+  text-decoration: none;
+  transition: color 0.3s ease-in;
+  text-align: center;
+}
+
+.main a:hover{
+  color: #231b42;
+}
+
+.factors{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.factors label{
+  margin-block: 1rem;
+  font-weight: bold;
+}
+
+.factors p{
+  font-size: smaller;
+}
+
+.factors textarea{
+  width: 12rem;
+  height: 5rem;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  padding: 1rem;
+  margin: 0;
+  border: 0;
+  border-radius: 1rem;
+  border: none;
 }
