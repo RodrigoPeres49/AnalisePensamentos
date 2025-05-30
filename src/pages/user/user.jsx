@@ -1,5 +1,5 @@
-import '../App.js';
-import '../App.css';
+import '../../App.js';
+import '../../App.css';
 
 
 function User(){
