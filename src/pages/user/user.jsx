@@ -1,48 +1,33 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../App.js';
 import '../../App.css';
 
+function User() {
+  const [userName, setUserName] = useState('');
+  const navigate = useNavigate();
 
-function User(){
-    return(
-        <div className=''>
-            <form className='green' action="">
-                <h2>Bem vindo Usuario</h2>
-                <h3>Insira os campos para adicioar os pensamentos:
-                </h3>
-                <div className='factors'>
-                    <label htmlFor="user">Fatores Desencadeantes</label>
-                    <p> O que você percebeu ou que ideia passou pela sua mente que desencadeou a preocupação?</p>
-                    <textarea name="user" id="" />
-                </div>
-                <div className='factors'>
-                    <label htmlFor="user"> Preocupação</label>
-                    <p>O que está ocupando sua mente nesse momento de preocupação?</p>
-                    <textarea name="user" id="" />
-                </div>
-                <div className='factors'>
-                    <label htmlFor="user">Tempo de preocupação</label>
-                    <p>Por quanto tempo você sentiu essa preocupação? Minutos ou Horas</p>
-                    <textarea name="user" id="" />
-                </div>
-                <div className='factors'>
-                    <label htmlFor="user">Desconforto</label>
-                    <p>Em uma escala de 0 a 100, o quanto você se sente desconfortável durante essa preocupação?</p>
-                    <textarea name="user" id="" />
-                </div>
-                <div className='factors'>
-                    <label htmlFor="user">Classificando a Preocupação</label>
-                    <p>Essa é uma preocupação produtiva ou improdutiva?</p>
-                    <textarea name="user" id="" />
-                </div>
-                <div className='factors'>
-                    <label htmlFor="user">Controle da situação</label>
-                    <p>Como você está agindo para controlar a situação que está causando preocupação?</p>
-                    <textarea name="user" id="" />
-                </div>
-                <button className='purple offwhite-text'>Adicionar</button>
-            </form>
-        </div>
-    )
+  useEffect(() => {
+    const loggedUserJSON = localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUserName(user.nome_completo || user.usuario || 'Usuário'); // tenta nome_completo, senão usuario, senão "Usuário"
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('loggedUser');
+    alert('Você saiu!')
+    navigate('/login');
+  };
+
+  return (
+    <div className='area green'>
+      <h2>Bem vindo {userName}</h2>
+      <a href='think' className='purple offwhite-text'>Adicionar Pensamento</a>
+      <a href='#' className='pink-text' onClick={handleLogout}> Sair </a>
+    </div>
+  );
 }
 
 export default User;

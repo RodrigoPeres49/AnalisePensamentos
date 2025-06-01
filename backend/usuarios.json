@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "usuario": "Rodrigo",
+    "email": "rodrigo_rrrr@hotmail.com",
+    "nome_completo": "Rodrigo Peres de Souza",
+    "telefone": "31992706307",
+    "senha": "123456"
+  },
+  {
+    "usuario": "Teste",
+    "email": "teste@teste.com",
+    "nome_completo": "Teste",
+    "telefone": "9999999999",
+    "senha": "123456"
+  }
+]

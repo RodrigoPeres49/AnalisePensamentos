@@ -5,7 +5,7 @@ function App() {
   return (
        <div className="main offwhite">
             <p.Header></p.Header>
-            <p.Register></p.Register>
+            <p.Main></p.Main>
             <p.Footer></p.Footer>
        </div>
   );

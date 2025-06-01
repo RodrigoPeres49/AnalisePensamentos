@@ -32,7 +32,8 @@
 .main input, label{
   margin: 0.1rem;
 }
-.main button, input[type="submit"]{
+
+.main button, input[type="submit"], a{
   font-family: Comic Sans MS, Comic Sans, cursive;
   margin: 0.7rem;
   cursor: pointer;
@@ -43,7 +44,12 @@
   transition: color 0.3s ease-in;
 }
 
-.main button:hover, input[type="submit"]:hover{
+.area{
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
+.main button:hover, input[type="submit"]:hover, a:hover{
 
   background-color: #e6e1cd;
   color: black;
