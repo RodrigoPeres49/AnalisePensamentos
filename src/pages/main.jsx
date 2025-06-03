@@ -3,7 +3,6 @@ import '../App.css';
 import * as p from './index.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-// Verifica se há um usuário logado
 const isUserLoggedIn = () => {
   return localStorage.getItem('loggedUser') !== null;
 };
@@ -12,7 +11,6 @@ function Main() {
   return (
     <Router>
       <Routes>
-        {/* Rota inicial decide com base no login */}
         <Route
           path="/"
           element={
@@ -20,14 +18,29 @@ function Main() {
           }
         />
 
+        {/* Rotas públicas */}
         <Route path="/login" element={<p.Login />} />
         <Route path="/register" element={<p.Register />} />
-        
-        {/* Rota protegida da área do usuário */}
+
+        {/* Área do usuário */}
         <Route
           path="/user"
           element={
             isUserLoggedIn() ? <p.User /> : <Navigate to="/login" />
+          }
+        />
+
+        {/* Rotas protegidas adicionais */}
+        <Route
+          path="/thought"
+          element={
+            isUserLoggedIn() ? <p.Thought /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/thought-list"
+          element={
+            isUserLoggedIn() ? <p.ThoughtList /> : <Navigate to="/login" />
           }
         />
       </Routes>

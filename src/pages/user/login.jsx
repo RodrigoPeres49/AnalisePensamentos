@@ -3,70 +3,73 @@ import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
 function Login() {
-    const [formData, setFormData] = useState({ user: "", password: "" });
-    const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-        try {
-            const response = await fetch("http://localhost:5000/users");
-            const usuarios = await response.json();
+    try {
+      const response = await fetch("http://localhost:5000/users");
+      const users = await response.json();
 
-            const usuarioEncontrado = usuarios.find(
-                (u) => u.usuario === formData.user && u.senha === formData.password
-            );
+      const foundUser = users.find(
+        (user) => user.usuario === formData.username && user.senha === formData.password
+      );
 
-            if (usuarioEncontrado) {
-                localStorage.setItem("loggedUser", JSON.stringify(usuarioEncontrado)); 
-                alert("Login realizado com sucesso!");
-                navigate("/user"); 
-            } else {
-                alert("Usuário ou senha incorretos.");
-            }
-        } catch (error) {
-            console.error("Erro no login:", error);
-            alert("Erro ao tentar logar. Tente novamente.");
-        }
-    };
+      if (foundUser) {
+        localStorage.setItem("loggedUser", JSON.stringify(foundUser));
+        localStorage.setItem("userId", foundUser.id);
 
-    return (
-        <div>
-            <form className="green" onSubmit={handleLogin}>
-                <h2>Login</h2>
+        alert("Login realizado com sucesso!");
+        navigate("/user");
+      } else {
+        alert("Usuário ou senha incorretos.");
+      }
+    } catch (error) {
+      alert("Erro ao tentar logar. Tente novamente.");
+    }
+  };
 
-                <label htmlFor="user">Usuário</label>
-                <input
-                    type="text"
-                    name="user"
-                    id="user"
-                    value={formData.user}
-                    onChange={handleChange}
-                    required
-                />
+  return (
+    <div>
+      <form className="green" onSubmit={handleLogin}>
+        <h2>Login</h2>
 
-                <label htmlFor="password">Senha</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
+        <label htmlFor="username">Usuário</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
 
-                <button className="purple offwhite-text" type="submit">Logar</button>
+        <label htmlFor="password">Senha</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
 
-                <a className="pink-text" href="/register">
-                    Não possui conta? Clique aqui para cadastrar.
-                </a>
-            </form>
-        </div>
-    );
+        <button className="purple offwhite-text" type="submit">
+          Logar
+        </button>
+
+        <a className="pink-text" href="/register">
+          Não possui conta? Clique aqui para cadastrar.
+        </a>
+      </form>
+    </div>
+  );
 }
 
 export default Login;
