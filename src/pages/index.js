@@ -8,6 +8,7 @@ import User from "./user/user";
 import Register from "./user/register";
 import Thought from "./user/thought";
 import ThoughtList from "./user/thought-list";
+import ThoughtEdit from "./user/thought-edit";
 
 export {
 
@@ -23,5 +24,6 @@ export {
     User,
     Register,
     Thought,
-    ThoughtList
+    ThoughtList,
+    ThoughtEdit
 }

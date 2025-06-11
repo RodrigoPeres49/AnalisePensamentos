@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const { error } = require('console');
 
 const app = express();
 const PORT = 5000;
@@ -144,4 +145,59 @@ app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
 
+//ENDPOINT PARA APAGAR PENSAMENTO
+app.delete('/thought/delete/:id', (req, res) =>{
+  const thoughtId = req.params.id;
 
+  fs.readFile(thoughtsFile, 'utf-8', (err, data)=> {
+    if(err){
+      return res.status(500).json({ error: 'Erro ao ler o arquivo de pensamentos'})
+    }
+    let thoughts = JSON.parse(data);
+    const initialLength = thoughts.length;
+    
+    thoughts = thoughts.filter(t => t.thoughtId =! thoughtId);
+
+    if (thoughts.length === initialLength){
+      return res.status(404).json({error: 'Pensamento não encontrado'});
+    }
+
+    fs.writeFile(thoughtsFile, JSON.stringify(thoughts, null, 2), (err) =>{
+      if(err) {
+        return res.status(500).json({ error: 'Erro ao salvar os pensamentos'});
+      }
+
+      res.json({message: 'Pensamento apagado com sucesso!'})
+    });
+  });
+});
+
+//ENDPOINT PARA EDITAR PENSAMENTO
+
+app.put('/thought/edit/:id', (req, res) =>{
+  const thoughtId = req.params.id;
+  const updatedData = req.body;
+
+  fs.readFile(thoughtsFile, 'utf-8', (err,data) =>{
+    if(err){
+      return res.status(500).json({error: 'Erro ao ler arquivo de pensamentos'})
+    }
+
+    let thoughts = JSON.parse(data);
+    const index = thoughts.findIndex(t => t.thoughtId == thoughtId);
+
+    if (index === -1) {
+      return res.status(404).json({ error: 'Pensamento não encontrado' });
+    }
+
+    thoughts[index] = { ...thoughts[index],...updatedData};
+
+    fs.watchFile(thoughtsFile,JSON.stringify(thoughts,null,2), (err) =>{
+      if(err){
+        return res.status(500).json({error: 'Erro ao salvar pensamento editado'})
+      }
+
+      res.json({message: 'Pensamento editado com sucesso!' thoughts: thoughts[index]});
+    });
+  });
+});

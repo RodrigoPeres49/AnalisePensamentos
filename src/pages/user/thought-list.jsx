@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function ThoughtList() {
   const [thoughts, setThoughts] = useState([]);
@@ -30,19 +31,26 @@ function ThoughtList() {
   return (
     <div>
       <h2>Seus Pensamentos</h2>
-      <ul>
-        {thoughts.map((thought) => (
-          <li key={thought.id}>
-            <p><strong>Data e Hora:</strong> {thought.datetime}</p>
-            <p><strong>Fatores Desencadeantes:</strong> {thought.triggers}</p>
-            <p><strong>Preocupação:</strong> {thought.worry}</p>
-            <p><strong>Duração:</strong> {thought.duration}</p>
-            <p><strong>Desconforto:</strong> {thought.discomfort}</p>
-            <p><strong>Tipo:</strong> {thought.type}</p>
-            <p><strong>Controle da Situação:</strong> {thought.coping}</p>
-          </li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr><td>Data e Hora</td><td>Fatores Desencadeantes</td><td>Preocupação</td><td>Duração</td><td>Desconforto</td><td>Tipo</td><td>Controle da Situação</td><td>Ações</td></tr>
+        </thead>
+        <tbody>
+            {thoughts.map((thought) => (
+              <tr key={thought.id}>
+                <td>{thought.datetime}</td>
+                <td>{thought.triggers}</td>
+                <td>{thought.worry}</td>
+                <td> {thought.duration}</td>
+                <td>{thought.discomfort}</td>
+                <td>{thought.type}</td>
+                <td>{thought.coping}</td>
+                <td><Link to = {`/thought/edit/${thought.id}`}>Editar</Link><Link to = {`/thought/delete/${thought.id}`}>Apagar</Link></td>
+
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 }
