@@ -11,43 +11,29 @@ function Main() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            isUserLoggedIn() ? <Navigate to="/user" /> : <Navigate to="/login" />
-          }
-        />
+         
+        {/* ROTAS PRINCIPAL, LOGIN E REGISTRO */}
 
-        {/* Rotas públicas */}
+        <Route path="/" element={isUserLoggedIn() ? <Navigate to="/user" /> : <Navigate to="/login" />} />
         <Route path="/login" element={<p.Login />} />
         <Route path="/register" element={<p.Register />} />
 
-        {/* Área do usuário */}
-        <Route
-          path="/user"
-          element={
-            isUserLoggedIn() ? <p.User /> : <Navigate to="/login" />
-          }
-        />
+        {/* USUARIO */}
 
-        {/* Rotas protegidas adicionais */}
-        <Route
-          path="/thought"
-          element={
-            isUserLoggedIn() ? <p.Thought /> : <Navigate to="/login" />
-          }
-        />
-        <Route
-          path="/thought-list"
-          element={
-            isUserLoggedIn() ? <p.ThoughtList /> : <Navigate to="/login" />
-          }
-        />
+        <Route path="/user" element={isUserLoggedIn() ? <p.User /> : <Navigate to="/login" />} />
+
+        {/* PENSAMENTOS */}
+
+        <Route path="/thought" element={isUserLoggedIn() ? <p.Thought /> : <Navigate to="/login" />} />
+        <Route path="/thought-list" element={isUserLoggedIn() ? <p.ThoughtList /> : <Navigate to="/login" />} />
+        <Route path="/thought/edit/:id" element={<p.ThoughtEdit />} />
+        
       </Routes>
     </Router>
   );
 }
 
 export default Main;
+
 
 

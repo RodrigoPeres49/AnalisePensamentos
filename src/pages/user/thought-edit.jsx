@@ -174,6 +174,7 @@ function ThoughtEdit() {
         </div>
 
         <button type="submit" className='purple offwhite-text'>Adicionar</button>
+        <a className='purple offwhite-text' href='/user'>Voltar</a>
       </form>
     </div>
   );

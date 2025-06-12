@@ -14,12 +14,17 @@
 .pink-text     { color: #f97992; }
 .purple-text   { color: #231b42; }
 
+/* ESTILO PRINCIPAL DA PAGINA */
+
 .main{
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: Comic Sans MS, Comic Sans, cursive;
+  text-align: center;
 }
+
+/* FORMULARIO PADRAO DE ESTILO DA PAGINA */
 
 .main form{
     display: flex;
@@ -29,20 +34,13 @@
     padding: 3rem;
 }
 
+/* ELEMENTOS DO FORMULARIO */
+
 .main input, label{
   margin: 0.1rem;
 }
 
-.main button, input[type="submit"], a{
-  font-family: Comic Sans MS, Comic Sans, cursive;
-  margin: 0.7rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: none;
-  transition: background-color 0.3s ease-in;
-  transition: color 0.3s ease-in;
-}
+
 
 .area{
   padding: 2rem;
@@ -55,15 +53,6 @@
   color: black;
 }
 
-.main a{
-  text-decoration: none;
-  transition: color 0.3s ease-in;
-  text-align: center;
-}
-
-.main a:hover{
-  color: #231b42;
-}
 
 .factors{
   display: flex;
@@ -89,4 +78,48 @@
   border: 0;
   border-radius: 1rem;
   border: none;
+}
+
+/* ESTILIZAÇÃO DO LINK E BOTAO */
+
+.main a, Link{
+  text-decoration: none;
+  transition: color 0.3s ease-in;
+  text-align: center;
+}
+
+.main a:hover, main Link:hover{
+  color: #231b42;
+}
+
+.main button, input[type="submit"], a, Link{
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  width: fit-content;
+  height: fit-content;
+  font-size: 0.8rem;
+  margin: 0.7rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  transition: background-color 0.3s ease-in;
+  transition: color 0.3s ease-in;
+}
+
+/* TABELA PARA LISTAR OS PENSAMENTOS */
+
+.thoughts-table td, table{
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 0.5rem;
+  height: 5rem;
+  text-align: center;
+}
+
+.thoughts-table thead{
+  font-weight: bold;
+}
+
+.thoughts-table p{
+  font-size: 0.8rem;
 }

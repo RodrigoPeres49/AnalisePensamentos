@@ -145,6 +145,27 @@ app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
 
+
+// ENDPOINT PARA OBTER UM PENSAMENTO POR ID
+app.get('/thought/:id', (req, res) => {
+  const thoughtId = req.params.id;
+
+  fs.readFile(thoughtsFile, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erro ao ler o arquivo de pensamentos.' });
+    }
+    const thoughts = JSON.parse(data);
+    const thought = thoughts.find(t => t.id == thoughtId);
+    
+    if (!thought) {
+      return res.status(404).json({ error: 'Pensamento não encontrado.' });
+    }
+
+    res.json(thought);
+  });
+});
+
+
 //ENDPOINT PARA APAGAR PENSAMENTO
 app.delete('/thought/delete/:id', (req, res) =>{
   const thoughtId = req.params.id;
@@ -156,7 +177,7 @@ app.delete('/thought/delete/:id', (req, res) =>{
     let thoughts = JSON.parse(data);
     const initialLength = thoughts.length;
     
-    thoughts = thoughts.filter(t => t.thoughtId =! thoughtId);
+    thoughts = thoughts.filter(t => t.id != thoughtId);
 
     if (thoughts.length === initialLength){
       return res.status(404).json({error: 'Pensamento não encontrado'});
@@ -172,8 +193,8 @@ app.delete('/thought/delete/:id', (req, res) =>{
   });
 });
 
-//ENDPOINT PARA EDITAR PENSAMENTO
 
+//ENDPOINT PARA EDITAR PENSAMENTO
 app.put('/thought/edit/:id', (req, res) =>{
   const thoughtId = req.params.id;
   const updatedData = req.body;
@@ -184,7 +205,7 @@ app.put('/thought/edit/:id', (req, res) =>{
     }
 
     let thoughts = JSON.parse(data);
-    const index = thoughts.findIndex(t => t.thoughtId == thoughtId);
+    const index = thoughts.findIndex(t => t.id == thoughtId);
 
     if (index === -1) {
       return res.status(404).json({ error: 'Pensamento não encontrado' });
@@ -192,12 +213,12 @@ app.put('/thought/edit/:id', (req, res) =>{
 
     thoughts[index] = { ...thoughts[index],...updatedData};
 
-    fs.watchFile(thoughtsFile,JSON.stringify(thoughts,null,2), (err) =>{
+    fs.writeFile(thoughtsFile,JSON.stringify(thoughts,null,2), (err) =>{
       if(err){
         return res.status(500).json({error: 'Erro ao salvar pensamento editado'})
       }
 
-      res.json({message: 'Pensamento editado com sucesso!' thoughts: thoughts[index]});
+      res.json({message: 'Pensamento editado com sucesso!', thoughts: thoughts[index]});
     });
   });
 });

@@ -1,26 +1,26 @@
 [
   {
-    "id": 1,
-    "userId": "1",
-    "triggers": "Teste",
-    "worry": "Teste",
-    "duration": "Teste",
-    "discomfort": "Teste",
-    "type": "Teste",
-    "coping": "Teste",
-    "datetime": "2020-02-20T20:20",
-    "dateSaved": "2025-06-03T01:59:51.667Z"
-  },
-  {
     "id": 2,
     "userId": "1",
-    "triggers": "Teste",
-    "worry": "Teste",
+    "triggers": "Editado",
+    "worry": "Editado",
     "duration": "Teste",
     "discomfort": "Teste",
     "type": "Teste",
     "coping": "Teste",
     "datetime": "2025-12-12T03:00",
     "dateSaved": "2025-06-05T22:39:45.497Z"
+  },
+  {
+    "id": 3,
+    "userId": "1",
+    "triggers": "Outro Teste",
+    "worry": "Outro Teste",
+    "duration": "Outro Teste",
+    "discomfort": "Outro Teste",
+    "type": "Outro Teste",
+    "coping": "Outro Teste",
+    "datetime": "2024-04-20T13:13",
+    "dateSaved": "2025-06-12T00:05:27.308Z"
   }
 ]
